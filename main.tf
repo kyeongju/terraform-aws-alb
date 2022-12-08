@@ -60,7 +60,7 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_target_group" "main" {
-  count = local.create_lb ? length(var.target_groups) : 0
+  count = local.create_lb || var.target_groups ? length(var.target_groups) : 0
 
   name        = lookup(var.target_groups[count.index], "name", null)
   name_prefix = lookup(var.target_groups[count.index], "name_prefix", null)
@@ -616,7 +616,7 @@ resource "aws_lb_listener_rule" "http_tcp_listener_rule" {
 }
 
 resource "aws_lb_listener" "frontend_http_tcp" {
-  count = local.create_lb ? length(var.http_tcp_listeners) : 0
+  count = local.create_lb || var.http_tcp_listeners ? length(var.http_tcp_listeners) : 0
 
   load_balancer_arn = aws_lb.this[0].arn
 
