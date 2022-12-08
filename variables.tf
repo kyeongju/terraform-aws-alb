@@ -16,6 +16,14 @@ variable "create_lb_listener" {
   default     = false
 }
 
+
+variable "load_balancer_arn" {
+  description = "load_balancer_arn"
+  type        = string
+  default     = null
+  
+}
+  
 variable "drop_invalid_header_fields" {
   description = "Indicates whether invalid header fields are dropped in application load balancers. Defaults to false."
   type        = bool
