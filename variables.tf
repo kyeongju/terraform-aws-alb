@@ -4,6 +4,18 @@ variable "create_lb" {
   default     = true
 }
 
+variable "create_lb_tg" {
+  description = "Controls if the tg should be created"
+  type        = bool
+  default     = false
+}
+
+variable "create_lb_listener" {
+  description = "Controls if the listener should be created"
+  type        = bool
+  default     = false
+}
+
 variable "drop_invalid_header_fields" {
   description = "Indicates whether invalid header fields are dropped in application load balancers. Defaults to false."
   type        = bool
