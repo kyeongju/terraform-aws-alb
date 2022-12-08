@@ -618,7 +618,8 @@ resource "aws_lb_listener_rule" "http_tcp_listener_rule" {
 resource "aws_lb_listener" "frontend_http_tcp" {
   count = local.create_lb || var.create_lb_listener ? length(var.http_tcp_listeners) : 0
 
-  load_balancer_arn = aws_lb.this[0].arn
+  load_balancer_arn = local.create_lb ? aws_lb.this[0].arn : var.load_balancer_arn
+  
 
   port     = var.http_tcp_listeners[count.index]["port"]
   protocol = var.http_tcp_listeners[count.index]["protocol"]
