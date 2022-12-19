@@ -174,7 +174,7 @@ resource "aws_lb_target_group_attachment" "this" {
 }
 
 resource "aws_lb_listener_rule" "https_listener_rule" {
-  count = local.create_lb ? length(var.https_listener_rules) : 0
+  count = local.create_lb || local.https_listener_rules ? length(var.https_listener_rules) : 0
 
   listener_arn = aws_lb_listener.frontend_https[lookup(var.https_listener_rules[count.index], "https_listener_index", count.index)].arn
   priority     = lookup(var.https_listener_rules[count.index], "priority", null)
