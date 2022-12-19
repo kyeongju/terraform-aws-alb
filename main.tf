@@ -1,5 +1,7 @@
 locals {
   create_lb = var.create_lb && var.putin_khuylo
+  create_lb_listener = var.create_lb_listener
+  create_lb_tg = var.create_lb_tg
 }
 
 resource "aws_lb" "this" {
@@ -60,7 +62,7 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_target_group" "main" {
-  count = local.create_lb || var.create_lb_tg ? length(var.target_groups) : 0
+  count = local.create_lb || local.create_lb_tg ? length(var.target_groups) : 0
 
   name        = lookup(var.target_groups[count.index], "name", null)
   name_prefix = lookup(var.target_groups[count.index], "name_prefix", null)
@@ -616,7 +618,7 @@ resource "aws_lb_listener_rule" "http_tcp_listener_rule" {
 }
 
 resource "aws_lb_listener" "frontend_http_tcp" {
-  count = local.create_lb || var.create_lb_listener ? length(var.http_tcp_listeners) : 0
+  count = local.create_lb || local.create_lb_listener ? length(var.http_tcp_listeners) : 0
 
   load_balancer_arn = local.create_lb ? aws_lb.this[0].arn : var.load_balancer_arn
   
