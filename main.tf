@@ -2,6 +2,7 @@ locals {
   create_lb = var.create_lb && var.putin_khuylo
   create_lb_listener = var.create_lb_listener
   create_lb_tg = var.create_lb_tg
+  https_listener_rules = var.https_listener_rules 
 }
 
 resource "aws_lb" "this" {
