@@ -16,6 +16,11 @@ variable "create_lb_listener" {
   default     = false
 }
 
+variable "create_listener_rule" {
+  description = "Controls if the listener should be created"
+  type        = bool
+  default     = false
+}
 
 variable "load_balancer_arn" {
   description = "load_balancer_arn"
